@@ -1,0 +1,25 @@
+toolforge: 1.0
+tool: abcd1234
+parameters:
+  - type: string
+    domain:
+      type: enumeration
+      values:
+        - Hi
+        - Hello
+        - Good morning
+        - Good afternoon
+        - Good evening
+    name: greeting
+    description: "How should the people be greeted?"
+    required: true
+inputs:
+  - name: names
+    description: "Who should be greeted?"
+    extensions:
+      - txt
+outputs:
+  - name: greetings
+    description: "The greetings!"
+    extensions:
+      - txt
