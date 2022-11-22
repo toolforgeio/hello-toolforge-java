@@ -3,17 +3,52 @@
 
     <groupId>io.toolforge</groupId>
     <artifactId>hello-toolforge</artifactId>
-    <name>hello-toolforge</name>
     <version>0.0.0-SNAPSHOT</version>
+    <name>hello-toolforge</name>
+    <inceptionYear>2022</inceptionYear>
+    <description>Example ToolForge tool using Java</description>
+    <url>https://github.com/toolforgeio/hello-toolforge-java</url>
     <packaging>jar</packaging>
 
+    <organization>
+        <name>ToolForge</name>
+        <url>https://www.toolforge.io/</url>
+    </organization>
+
+    <scm>
+        <connection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</developerConnection>
+        <url>https://github.com/toolforgeio/hello-toolforge-java/tree/main</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Andy Boothe</name>
+            <email>andy.boothe@gmail.com</email>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/toolforgeio/hello-toolforge-java</url>
+    </issueManagement>
+    
     <properties>
-        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        
         <discourse.version>0.0.2</discourse.version>
         <chardet4j.version>72.1.0</chardet4j.version>
         <slf4j.version>1.7.36</slf4j.version>
         <guava.version>31.1-jre</guava.version>
+        <toolforge4j.version>0.0.0-SNAPSHOT</toolforge4j.version>
         <hamcrest.version>1.3</hamcrest.version>
         <junit.version>4.13.2</junit.version>
     </properties>
@@ -148,6 +183,11 @@
             <groupId>com.sigpwned</groupId>
             <artifactId>chardet4j</artifactId>
             <version>${chardet4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.toolforge</groupId>
+            <artifactId>toolforge4j</artifactId>
+            <version>${toolforge4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

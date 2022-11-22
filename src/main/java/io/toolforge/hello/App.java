@@ -9,10 +9,10 @@ import com.sigpwned.discourse.core.util.Discourse;
 
 public class App {
   public static void main(String[] args) throws Exception {
-    main(Discourse.configuration(Configuration2.class, args).validate());
+    main(Discourse.configuration(Configuration.class, args).validate());
   }
 
-  public static void main(Configuration2 configuration) throws Exception {
+  public static void main(Configuration configuration) throws Exception {
     System.out.println("Hello!");
 
     List<String> names;
