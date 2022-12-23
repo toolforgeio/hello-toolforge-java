@@ -1,5 +1,9 @@
+# bump 1
 toolforge: 1.0
-tool: abcd1234
+container: oxjr1wzv
+type: tool
+environment:
+  size: small
 parameters:
   - type: string
     domain:
