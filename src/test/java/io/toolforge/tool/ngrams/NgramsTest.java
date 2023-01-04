@@ -160,7 +160,7 @@ public class NgramsTest {
         {"yermin", "1"}, {"yohan", "1"}, {"yohel", "1"}, {"yonathan", "1"}, {"yonny", "1"},
         {"yordan", "1"}, {"yuli", "1"}, {"yusei", "1"}, {"yusmeiro", "1"}};
 
-    for (File file : new File[] {ngramsXlsx}) {
+    for (File file : new File[] {ngramsCsv, ngramsXlsx}) {
       try (TabularWorksheetReader rows = SpreadsheetFactory.getInstance()
           .readActiveTabularWorksheet(() -> new FileInputStream(file))) {
         assertThat(rows.stream().map(row -> {
