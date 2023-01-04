@@ -1,29 +1,46 @@
-# bump 1
 toolforge: 1.0
 container: oxjr1wzv
 type: tool
 environment:
-  size: small
+  size: medium
 parameters:
+  - type: int
+    minimum: 1
+    maximum: 5
+    default: 1
+    name: MinNgramLength
+    description: >
+      How many words should be in the smallest ngrams?
+    required: true
+  - type: int
+    minimum: 1
+    maximum: 5
+    default: 3
+    name: MaxNgramLength
+    description: >
+      How many words should be in the longest ngrams?
+    required: true
   - type: string
     domain:
-      type: enumeration
-      values:
-        - Hi
-        - Hello
-        - Good morning
-        - Good afternoon
-        - Good evening
-    name: greeting
-    description: "How should the people be greeted?"
+      type: pattern
+      pattern: .{1,80}
+    name: TextColumnName
+    description: >
+      Which spreadsheet column contains the text to analyze?
     required: true
 inputs:
-  - name: names
-    description: "Who should be greeted?"
+  - name: Data
+    description: >
+      The spreadsheet containing the text to analyze.
     extensions:
       - txt
+      - csv
+      - xls
+      - xlsx
 outputs:
-  - name: greetings
-    description: "The greetings!"
+  - name: Ngrams
+    description: >
+      The output containing sorted ngram data.
     extensions:
-      - txt
+      - csv
+      - xlsx

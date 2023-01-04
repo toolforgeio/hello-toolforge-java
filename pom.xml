@@ -2,12 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.toolforge</groupId>
-    <artifactId>hello-toolforge</artifactId>
+    <artifactId>toolforge-ngrams-tool</artifactId>
     <version>0.0.0-SNAPSHOT</version>
-    <name>hello-toolforge</name>
+    <name>toolforge-ngrams-tool</name>
     <inceptionYear>2022</inceptionYear>
     <description>Example ToolForge tool using Java</description>
-    <url>https://github.com/toolforgeio/hello-toolforge-java</url>
+    <url>https://github.com/toolforgeio/toolforge-ngrams-tool-java</url>
     <packaging>jar</packaging>
 
     <organization>
@@ -16,9 +16,9 @@
     </organization>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</developerConnection>
-        <url>https://github.com/toolforgeio/hello-toolforge-java/tree/main</url>
+        <connection>scm:git:ssh://git@github.com/toolforgeio/toolforge-ngrams-tool-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/toolforgeio/toolforge-ngrams-tool-java.git</developerConnection>
+        <url>https://github.com/toolforgeio/toolforge-ngrams-tool-java/tree/main</url>
     </scm>
 
     <licenses>
@@ -37,13 +37,13 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/toolforgeio/hello-toolforge-java</url>
+        <url>https://github.com/toolforgeio/toolforge-ngrams-tool-java</url>
     </issueManagement>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        
+
         <discourse.version>0.0.2</discourse.version>
         <chardet4j.version>72.1.0</chardet4j.version>
         <slf4j.version>1.7.36</slf4j.version>
@@ -113,7 +113,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.toolforge.hello.App</mainClass>
+                                    <mainClass>io.toolforge.tool.ngrams.App</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -143,7 +143,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>docker.toolforge.io/sigpwned/hello-toolforge</name>
+                            <name>docker.toolforge.io/toolforge/toolforge-ngrams-tool</name>
                         </image>
                     </images>
                 </configuration>
@@ -151,7 +151,7 @@
             <plugin>
                 <groupId>io.toolforge</groupId>
                 <artifactId>toolforge-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -160,7 +160,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources</outputDirectory>
-                            <outputPackage>io.toolforge.hello</outputPackage>
+                            <outputPackage>io.toolforge.tool.ngrams</outputPackage>
                         </configuration>
                     </execution>
                 </executions>
@@ -169,6 +169,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>com.sigpwned</groupId>
+            <artifactId>chardet4j</artifactId>
+            <version>72.1.1</version>
+        </dependency>
         <dependency>
             <groupId>com.sigpwned</groupId>
             <artifactId>discourse-core</artifactId>
@@ -180,20 +185,31 @@
             <version>${guava.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.sigpwned</groupId>
-            <artifactId>chardet4j</artifactId>
-            <version>${chardet4j.version}</version>
-        </dependency>
-        <dependency>
             <groupId>io.toolforge</groupId>
             <artifactId>toolforge4j</artifactId>
             <version>${toolforge4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sigpwned</groupId>
+            <artifactId>spreadsheet4j-excel</artifactId>
+            <version>0.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sigpwned</groupId>
+            <artifactId>spreadsheet4j-csv</artifactId>
+            <version>0.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sigpwned</groupId>
+            <artifactId>uax29</artifactId>
+            <version>0.0.0-b2</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
