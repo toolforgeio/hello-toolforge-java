@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.toolforge</groupId>
     <artifactId>hello-toolforge</artifactId>
     <version>0.0.0-SNAPSHOT</version>
@@ -9,53 +8,28 @@
     <description>Example ToolForge tool using Java</description>
     <url>https://github.com/toolforgeio/hello-toolforge-java</url>
     <packaging>jar</packaging>
-
-    <organization>
-        <name>ToolForge</name>
-        <url>https://www.toolforge.io/</url>
-    </organization>
-
     <scm>
         <connection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/toolforgeio/hello-toolforge-java.git</developerConnection>
         <url>https://github.com/toolforgeio/hello-toolforge-java/tree/main</url>
     </scm>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Andy Boothe</name>
-            <email>andy.boothe@gmail.com</email>
-        </developer>
-    </developers>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/toolforgeio/hello-toolforge-java</url>
-    </issueManagement>
-    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        
         <discourse.version>0.0.2</discourse.version>
-        <chardet4j.version>72.1.0</chardet4j.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <guava.version>31.1-jre</guava.version>
         <toolforge4j.version>0.0.0</toolforge4j.version>
         <hamcrest.version>1.3</hamcrest.version>
         <junit.version>4.13.2</junit.version>
     </properties>
-
     <build>
+        <!-- This sets the name of the output JAR file. -->
         <finalName>${project.name}</finalName>
         <plugins>
+            <!--
+              We're using Java 17, which is the latest LTS at the time of this
+              writing. Users can use whatever version they like!
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -66,6 +40,11 @@
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
+            
+            <!--
+              Make sure the Configuration class generated from the manifest
+              file is included in the build.
+            -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -84,6 +63,11 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <!--
+              Create an uber JAR with our tool as the main class, making sure
+              to preserve service locator files, manifests, etc.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -113,13 +97,17 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.toolforge.hello.App</mainClass>
+                                    <mainClass>io.toolforge.tool.hello.App</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            
+            <!--
+              Build our ToolForge docker container as part of our Maven build.
+            -->
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -132,26 +120,23 @@
                         </goals>
                         <phase>package</phase>
                     </execution>
-                    <execution>
-                        <id>docker-push</id>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
                 </executions>
                 <configuration>
                     <images>
                         <image>
-                            <name>docker.toolforge.io/sigpwned/hello-toolforge</name>
+                            <name>docker.toolforge.io/toolforgeio/hello-toolforge</name>
                         </image>
                     </images>
                 </configuration>
             </plugin>
+            
+            <!--
+              Generate Configuration code from our manifest.
+            -->
             <plugin>
                 <groupId>io.toolforge</groupId>
                 <artifactId>toolforge-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.3</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -160,40 +145,41 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources</outputDirectory>
-                            <outputPackage>io.toolforge.hello</outputPackage>
+                            <outputPackage>io.toolforge.tool.hello</outputPackage>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
+        <!--
+          Our generated Configuration class uses the excellent discourse
+          library ("Civilized arguments for Java" to parse program arguments.
+        -->
         <dependency>
             <groupId>com.sigpwned</groupId>
             <artifactId>discourse-core</artifactId>
             <version>${discourse.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sigpwned</groupId>
-            <artifactId>chardet4j</artifactId>
-            <version>${chardet4j.version}</version>
-        </dependency>
+        
+        <!-- This support library assists with building ToolForge tools. -->
         <dependency>
             <groupId>io.toolforge</groupId>
             <artifactId>toolforge4j</artifactId>
             <version>${toolforge4j.version}</version>
         </dependency>
+        
+        <!--
+          Redirect any logs to STDOUT.
+        -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        
+        <!-- Testing, testing, and more testing. -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -208,4 +194,3 @@
         </dependency>
     </dependencies>
 </project>
-

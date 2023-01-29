@@ -1,9 +1,8 @@
-# bump 1
 toolforge: 1.0
-container: oxjr1wzv
+container: abcd1234
 type: tool
 environment:
-  size: small
+  size: medium
 parameters:
   - type: string
     domain:
@@ -14,12 +13,12 @@ parameters:
         - Good morning
         - Good afternoon
         - Good evening
-    name: greeting
+    name: Greeting
     description: "How should the people be greeted?"
-    required: true
+    required: false
 inputs:
-  - name: names
-    description: "Who should be greeted?"
+  - name: Names
+    description: "A text file containing the names of people to greet, one per line."
     extensions:
       - txt
 outputs:
