@@ -1,19 +1,29 @@
 # HELLO TOOLFORGE
 
+## Introduction
+
 This project is an example implementation of a
 [ToolForge](https://app.toolforge.io/) tool in Java. It uses the [ToolForge
 Maven plugin](https://github.com/toolforgeio/toolforge-maven-plugin) to
 generate its argument parser from its manifest. It also uses the excellent
 [Fabric8 Docker Maven plugin](https://dmp.fabric8.io/) to build its
-[Docker](https://www.docker.com/) container for pushing into ToolForge. Simply
-running the following command will generate the required Docker image:
+[Docker](https://www.docker.com/) container for pushing into ToolForge.
+
+## Building
+
+Simply running the following command will generate the required Docker image:
 
     mvn clean compile install
+
+Note that this example also includes GitHub actions for CI/CD.
+
+## Creating Your Own Tool
     
 To adapt this example into a real tool, the user should:
 
-1. Create a ToolForge account and create a new container. Call it whatever
-   you like! Note the container's container location and ID.
+1. Create a [ToolForge](https://www.toolforge.io) account and create a new
+   container. Call it whatever you like! Note the container's container location
+   and ID.
 2. Update the POM to reflect the tool's real GAV, SCM, ToolForge tool path,
    target package, main class, and so on.
 3. Update the Dockerfile to reflect the container's name and environment.

@@ -40,12 +40,18 @@ public class App {
     System.out.println("I will now greet " + names.size() + " names with `" + greeting + "'.");
 
     // Write our program output
-    try (Writer output = configuration.greetingsTxt.getWriter(StandardCharsets.UTF_8)) {
-      for (String name : names)
-        output.write(format("%s, %s!\n", greeting, name));
+    try (Writer output = configuration.salutationsTxt.getWriter(StandardCharsets.UTF_8)) {
+      for (String name : names) {
+        output.write(salutation(greeting, name));
+        output.write("\n");
+      }
     }
 
     // It's polite to say goodbye!
     System.out.println("Goodbye!");
+  }
+
+  public static String salutation(String greeting, String name) {
+    return format("%s, %s!", greeting, name);
   }
 }

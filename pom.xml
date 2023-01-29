@@ -19,6 +19,7 @@
         <discourse.version>0.0.2</discourse.version>
         <slf4j.version>1.7.36</slf4j.version>
         <toolforge4j.version>0.0.0</toolforge4j.version>
+        <guava.version>31.1-jre</guava.version>
         <hamcrest.version>1.3</hamcrest.version>
         <junit.version>4.13.2</junit.version>
     </properties>
@@ -162,7 +163,7 @@
             <artifactId>discourse-core</artifactId>
             <version>${discourse.version}</version>
         </dependency>
-        
+
         <!-- This support library assists with building ToolForge tools. -->
         <dependency>
             <groupId>io.toolforge</groupId>
@@ -180,6 +181,12 @@
         </dependency>
         
         <!-- Testing, testing, and more testing. -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

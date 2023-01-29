@@ -22,7 +22,7 @@ inputs:
     extensions:
       - txt
 outputs:
-  - name: greetings
-    description: "The greetings!"
+  - name: Salutations
+    description: "The friendly salutations!"
     extensions:
       - txt

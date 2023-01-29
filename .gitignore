@@ -57,6 +57,7 @@ buildNumber.properties
 
 # Emacs temporary files
 *~
+\#*
 
 # Eclipse m2e
 .settings
