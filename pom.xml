@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <discourse.version>0.0.2</discourse.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.6</slf4j.version>
         <toolforge4j.version>0.0.0</toolforge4j.version>
         <guava.version>31.1-jre</guava.version>
         <hamcrest.version>1.3</hamcrest.version>
