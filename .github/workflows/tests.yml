@@ -1,0 +1,41 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3.9.0
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Cache Maven packages
+      uses: actions/cache@v3.2.3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Build and analyze
+      run: |
+        mvn                  \
+        -B                   \
+        clean                \
+        verify               \
+        -Ddocker.skip=true   \
+        --file pom.xml
