@@ -11,6 +11,10 @@ It also uses the excellent
 [Fabric8 Docker Maven plugin](https://dmp.fabric8.io/) to build its
 [Docker](https://www.docker.com/) container for pushing into ToolForge.
 
+This "Hello Toolforge" template is released FREE TO USE under the Apache 2.0
+License for building ToolForge tools. Tool developers may choose their own
+licenses for their tools, including closed source.
+
 ## Building
 
 Simply running the following command will generate the required Docker image:
